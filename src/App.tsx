@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { RecoilRoot } from 'recoil';
+import MindMap from './components/MindMap';
 
 function App() {
+  const [id, setId] = useState(0);
+  const [items, setItems] = useState<number[]>([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <RecoilRoot>
+      <div className="App">
+        <button
+          onClick={() => {
+            setItems((state) => [...state, id]);
+            setId(id + 1);
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          아이템 생성
+        </button>
+        <MindMap items={items} />
+      </div>
+    </RecoilRoot>
   );
 }
 
