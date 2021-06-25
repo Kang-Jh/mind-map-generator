@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 import MindMap from './components/MindMap';
 
 function App() {
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
   const [items, setItems] = useState<number[]>([]);
 
   return (
