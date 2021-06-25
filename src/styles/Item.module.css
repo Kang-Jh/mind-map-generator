@@ -1,5 +1,19 @@
 .item {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.inputBox {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.selected {
+  border: 3px blue dashed;
 }
