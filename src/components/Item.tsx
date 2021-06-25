@@ -1,12 +1,12 @@
 import styles from '../styles/Item.module.css';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { itemAtom, singleSelectedIdAtom } from '../atoms';
+import { itemStateWithId, selectedIdsState } from '../atoms';
 import { useState } from 'react';
 
 export default function Item({ id }: { id: number }) {
-  const [item, setItem] = useRecoilState(itemAtom(id));
+  const [item, setItem] = useRecoilState(itemStateWithId(id));
   const [isEdittingText, setIsEdittingText] = useState(false);
-  const setSingleSelectedId = useSetRecoilState(singleSelectedIdAtom);
+  const setSelectedIds = useSetRecoilState(selectedIdsState);
 
   return (
     <div
@@ -26,7 +26,17 @@ export default function Item({ id }: { id: number }) {
           ...state,
           selected: isEdittingText ? true : !state.selected,
         }));
-        setSingleSelectedId(isEdittingText ? id : item.selected ? 0 : id);
+        setSelectedIds((state) => {
+          if (isEdittingText) {
+            return state;
+          }
+
+          if (item.selected) {
+            return state.filter((el) => el !== id);
+          }
+
+          return [...state, id];
+        });
 
         setIsEdittingText(false);
       }}
@@ -70,7 +80,7 @@ export default function Item({ id }: { id: number }) {
               ...state,
               selected: true,
             }));
-            setSingleSelectedId(id);
+            setSelectedIds((state) => [...state, id]);
           }}
         >
           {item.text}
