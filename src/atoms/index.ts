@@ -1,3 +1,4 @@
 import { itemAtom } from './itemAtom';
+import { singleSelectedIdAtom } from './selectedIdAtom';
 
-export { itemAtom };
+export { itemAtom, singleSelectedIdAtom };
