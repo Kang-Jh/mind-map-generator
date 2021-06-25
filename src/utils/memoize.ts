@@ -29,4 +29,4 @@ function memoizeItemAtomBasedOnId<T = any>(
   };
 }
 
-export default memoizeItemAtomBasedOnId;
+export { memoizeItemAtomBasedOnId };
