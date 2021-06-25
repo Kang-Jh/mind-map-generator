@@ -1,33 +1,23 @@
 import { useRecoilState } from 'recoil';
-import { itemAtom, singleSelectedIdAtom } from '../atoms';
+import { selectedItemsState } from '../atoms';
 import styles from '../styles/MindMap.module.css';
 import Item from './Item';
 
 export default function MindMap({ items }: { items: number[] }) {
-  const [singleSelectedId, setSingleSelectedId] =
-    useRecoilState(singleSelectedIdAtom);
-  const [singleSelectedItem, setSingleSelectedItem] = useRecoilState(
-    itemAtom(singleSelectedId)
-  );
+  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
 
   return (
     <div
       className={styles.MindMapDiv}
-      onClick={() => {
-        setSingleSelectedItem((state) => ({
-          ...state,
-          selected: false,
-        }));
-        setSingleSelectedId(0);
-      }}
       onMouseMove={(e) => {
-        e.preventDefault();
-        if (e.ctrlKey && singleSelectedItem.selected) {
-          setSingleSelectedItem((state) => ({
-            ...state,
-            top: state.top + e.movementY,
-            left: state.left + e.movementX,
-          }));
+        if (e.ctrlKey) {
+          setSelectedItems(
+            selectedItems.map((item) => ({
+              ...item,
+              top: item.top + e.movementY,
+              left: item.left + e.movementX,
+            }))
+          );
         }
       }}
     >
