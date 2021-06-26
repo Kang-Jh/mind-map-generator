@@ -1,3 +1,13 @@
-import { itemStateWithId, selectedIdsState, selectedItemsState } from './item';
+import {
+  itemStateWithId,
+  selectedIdsState,
+  selectedItemsState,
+  linkedItemsState,
+} from './item';
 
-export { itemStateWithId, selectedIdsState, selectedItemsState };
+export {
+  itemStateWithId,
+  selectedIdsState,
+  selectedItemsState,
+  linkedItemsState,
+};
