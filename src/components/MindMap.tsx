@@ -1,11 +1,17 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { selectedIdsState, selectedItemsState } from '../atoms';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  linkedItemsState,
+  selectedIdsState,
+  selectedItemsState,
+} from '../atoms';
 import styles from '../styles/MindMap.module.css';
 import Item from './Item';
+import Line from './Line';
 
 export default function MindMap({ items }: { items: number[] }) {
   const setSelectedIds = useSetRecoilState(selectedIdsState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
+  const linkedItems = useRecoilValue(linkedItemsState);
 
   return (
     <div
@@ -32,6 +38,10 @@ export default function MindMap({ items }: { items: number[] }) {
     >
       {items.map((id) => (
         <Item key={id} id={id} />
+      ))}
+
+      {linkedItems.map((pair) => (
+        <Line key={pair} pair={pair} />
       ))}
     </div>
   );
