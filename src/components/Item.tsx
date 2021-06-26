@@ -7,17 +7,20 @@ export default function Item({ id }: { id: number }) {
   const [item, setItem] = useRecoilState(itemStateWithId(id));
   const [isEdittingText, setIsEdittingText] = useState(false);
   const setSelectedIds = useSetRecoilState(selectedIdsState);
+  // 지름
+  const diameter = item.radius * 2;
 
   return (
     <div
       className={`${styles.item} ${item.selected ? styles.selected : ''}`}
       style={{
-        width: `${item.width}px`,
-        height: `${item.height}px`,
+        width: `${diameter}px`,
+        height: `${diameter}px`,
         backgroundColor: item.bgColor,
         top: item.top,
         left: item.left,
-        zIndex: item.selected ? 100000 : 0,
+        zIndex: item.selected ? 100000 : 1,
+        borderRadius: '50%',
       }}
       onClick={(e) => {
         e.stopPropagation();
