@@ -3,6 +3,7 @@ import {
   selectedItemsState,
   linkedItemsState,
   itemStateWithId,
+  mindMapBackgroundColorState,
 } from '../atoms';
 
 export default function ToolMenu() {
@@ -15,6 +16,10 @@ export default function ToolMenu() {
     itemStateWithId(selectedItems[selectedItems.length - 1]?.id ?? 0)
   );
 
+  const [mindMapBackgroundColor, setMindMapBackgroundColor] = useRecoilState(
+    mindMapBackgroundColorState
+  );
+
   return (
     <div
       // 아이템 리사이즈시 툴메뉴에 있는 텍스트들이 드래그로 인해 선택되는 것을 방지
@@ -22,6 +27,16 @@ export default function ToolMenu() {
         e.preventDefault();
       }}
     >
+      <div>
+        <label htmlFor="mindMapBgColor">마인드맵 배경 색상</label>
+        <input
+          type="color"
+          id="mindMapBgColor"
+          value={mindMapBackgroundColor}
+          onChange={(e) => setMindMapBackgroundColor(e.target.value)}
+        />
+      </div>
+
       {/* 부등호를 써준 이유는 selectedItems.length 로 할 경우 길이가 0일 때 화면에 0이 표시되기 때문임 */}
       {lastSelectedItem.id > 0 && (
         <div>

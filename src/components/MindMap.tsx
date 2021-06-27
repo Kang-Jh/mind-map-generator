@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   itemStateWithId,
   linkedItemsState,
+  mindMapBackgroundColorState,
   selectedIdsState,
   selectedItemsState,
 } from '../atoms';
@@ -11,6 +12,7 @@ import Item from './Item';
 import Line from './Line';
 
 export default function MindMap({ items }: { items: number[] }) {
+  const backgroundColor = useRecoilValue(mindMapBackgroundColorState);
   const setSelectedIds = useSetRecoilState(selectedIdsState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
   const linkedItems = useRecoilValue(linkedItemsState);
@@ -20,6 +22,7 @@ export default function MindMap({ items }: { items: number[] }) {
 
   return (
     <div
+      style={{ backgroundColor }}
       className={styles.MindMapDiv}
       // 바탕을 클릭하면 선택된 모든 아이템들이 풀리도록 onClick 프로퍼티 설정
       onClick={() => {
