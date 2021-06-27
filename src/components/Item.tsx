@@ -1,14 +1,24 @@
 import styles from '../styles/Item.module.css';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { itemStateWithId, selectedIdsState } from '../atoms';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-export default function Item({ id }: { id: number }) {
+export default function Item({
+  id,
+  setResizableId,
+}: {
+  id: number;
+  setResizableId: Dispatch<SetStateAction<number>>;
+}) {
   const [item, setItem] = useRecoilState(itemStateWithId(id));
   const [isEdittingText, setIsEdittingText] = useState(false);
   const setSelectedIds = useSetRecoilState(selectedIdsState);
+  const [isResizing, setIsResizing] = useState(false);
   // 지름
   const diameter = item.radius * 2;
+  const resizeBtnEdge = Math.round(Math.sqrt(Math.pow(item.radius, 2) / 2));
+  const resizeBtnPositionX = diameter - (item.radius - resizeBtnEdge);
+  const resizeBtnPositionY = item.radius + resizeBtnEdge;
 
   return (
     <div
@@ -20,10 +30,13 @@ export default function Item({ id }: { id: number }) {
         top: item.top,
         left: item.left,
         zIndex: item.selected ? 100000 : 1,
-        borderRadius: '50%',
       }}
       onClick={(e) => {
         e.stopPropagation();
+        if (isResizing) {
+          setIsResizing(false);
+          return;
+        }
 
         setItem((state) => ({
           ...state,
@@ -43,7 +56,27 @@ export default function Item({ id }: { id: number }) {
 
         setIsEdittingText(false);
       }}
+      onMouseMove={(e) => {
+        e.preventDefault();
+      }}
+      onMouseDown={(e) => {
+        e.preventDefault();
+      }}
     >
+      {item.selected && (
+        <div
+          className={styles.resizeBtn}
+          style={{ top: resizeBtnPositionY - 5, left: resizeBtnPositionX - 5 }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          onMouseDown={() => {
+            setResizableId(id);
+            setIsResizing(true);
+          }}
+        />
+      )}
+
       {isEdittingText ? (
         <input
           className={styles.input}
@@ -83,7 +116,9 @@ export default function Item({ id }: { id: number }) {
               ...state,
               selected: true,
             }));
-            setSelectedIds((state) => [...state, id]);
+            setSelectedIds((state) => {
+              return state.includes(id) ? state : [...state, id];
+            });
           }}
         >
           {item.text}

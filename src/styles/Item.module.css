@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
 }
 
 .inputBox {
@@ -16,4 +17,15 @@
 
 .selected {
   border: 3px blue dashed;
+  resize: both;
+}
+
+.resizeBtn {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background: white;
+  cursor: se-resize;
 }
