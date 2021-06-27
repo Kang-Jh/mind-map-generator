@@ -41,7 +41,7 @@ export default function ToolMenu() {
       {lastSelectedItem.id > 0 && (
         <div>
           <div>
-            <label htmlFor="itemText">개념</label>
+            <label htmlFor="itemText">내용</label>
             <input
               id="itemText"
               type="text"
@@ -50,6 +50,21 @@ export default function ToolMenu() {
                 setLastSelectedItem((state) => ({
                   ...state,
                   text: e.target.value,
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <label htmlFor="itemBgColor">아이템 배경 색상</label>
+            <input
+              type="color"
+              id="itemBgColor"
+              value={lastSelectedItem.bgColor}
+              onChange={(e) =>
+                setLastSelectedItem((state) => ({
+                  ...state,
+                  bgColor: e.target.value,
                 }))
               }
             />
@@ -95,6 +110,36 @@ export default function ToolMenu() {
                 setLastSelectedItem((state) => ({
                   ...state,
                   top: parseInt(e.target.value),
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <label htmlFor="fontSize">폰트 크기</label>
+            <input
+              type="number"
+              id="fontSize"
+              value={lastSelectedItem.fontSize}
+              onChange={(e) =>
+                setLastSelectedItem((state) => ({
+                  ...state,
+                  fontSize: parseInt(e.target.value),
+                }))
+              }
+            />
+          </div>
+
+          <div>
+            <label htmlFor="fontColor">폰트 색상</label>
+            <input
+              type="color"
+              id="fontColor"
+              value={lastSelectedItem.fontColor}
+              onChange={(e) =>
+                setLastSelectedItem((state) => ({
+                  ...state,
+                  fontColor: e.target.value,
                 }))
               }
             />
