@@ -27,6 +27,8 @@ export default function Item({
         width: `${diameter}px`,
         height: `${diameter}px`,
         backgroundColor: item.bgColor,
+        fontSize: `${item.fontSize}px`,
+        color: `${item.fontColor}`,
         top: item.top,
         left: item.left,
         zIndex: item.selected ? 100000 : 1,
