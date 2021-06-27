@@ -8,6 +8,8 @@ export interface ItemInterface {
   top: number;
   left: number;
   bgColor: string;
+  fontSize: number;
+  fontColor: string;
   selected: boolean;
   parent: number | null;
   children: number[];
@@ -23,6 +25,8 @@ export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
       top: 0,
       left: 0,
       bgColor: `#CCC`,
+      fontSize: 16,
+      fontColor: '#000',
       selected: false,
       parent: null,
       children: [],
