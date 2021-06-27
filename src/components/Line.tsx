@@ -63,8 +63,8 @@ export default function Line({ pair }: { pair: string }) {
     <canvas
       className={styles.canvas}
       ref={canvasRef}
-      width={canvasWidth ? canvasWidth : 2}
-      height={canvasHeight ? canvasHeight : 2}
+      width={canvasWidth ? canvasWidth : 1}
+      height={canvasHeight ? canvasHeight : 1}
       style={{
         top: canvasTop,
         left: canvasLeft,
