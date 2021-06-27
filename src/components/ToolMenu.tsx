@@ -16,7 +16,11 @@ export default function ToolMenu() {
   );
 
   return (
-    <div>
+    <div
+      onMouseMoveCapture={(e) => {
+        e.preventDefault();
+      }}
+    >
       {/* 부등호를 써준 이유는 selectedItems.length 로 할 경우 길이가 0일 때 화면에 0이 표시되기 때문임 */}
       {lastSelectedItem.id > 0 && (
         <div>
