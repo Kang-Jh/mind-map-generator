@@ -20,6 +20,7 @@ export const idsState = atom<number[]>({
   default: [],
 });
 
+// 아이디를 인자로 받아 원자를 반환
 export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
   atom<ItemInterface>({
     key: `item${id}State`,
@@ -39,11 +40,13 @@ export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
   })
 );
 
+// 선택된 아이디들을 담는 원자
 export const selectedIdsState = atom<number[]>({
   key: 'selectedIdsState',
   default: [],
 });
 
+// 선택된 아이디들을 통해 얻어지는 아이디들을 반환하는 선택자
 export const selectedItemsState = selector<ItemInterface[]>({
   key: 'selectedItemsState',
   get: ({ get }) => {
