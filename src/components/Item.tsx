@@ -31,7 +31,7 @@ export default function Item({
         color: `${item.fontColor}`,
         top: item.top,
         left: item.left,
-        zIndex: item.selected ? 100000 : 1,
+        zIndex: item.selected ? 2 : 1,
       }}
       onClick={(e) => {
         e.stopPropagation();
