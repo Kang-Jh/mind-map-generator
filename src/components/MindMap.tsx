@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
+  idsState,
   itemStateWithId,
   linkedItemsState,
   mindMapBackgroundColorState,
@@ -11,7 +12,8 @@ import styles from '../styles/MindMap.module.css';
 import Item from './Item';
 import Line from './Line';
 
-export default function MindMap({ items }: { items: number[] }) {
+export default function MindMap() {
+  const ids = useRecoilValue(idsState);
   const backgroundColor = useRecoilValue(mindMapBackgroundColorState);
   const setSelectedIds = useSetRecoilState(selectedIdsState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
@@ -74,7 +76,7 @@ export default function MindMap({ items }: { items: number[] }) {
         }
       }}
     >
-      {items.map((id) => (
+      {ids.map((id) => (
         <Item key={id} id={id} setResizableId={setResizableId} />
       ))}
 
