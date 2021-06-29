@@ -1,3 +1,4 @@
+import styles from '../styles/ToolMenu.module.css';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   selectedItemsState,
@@ -22,6 +23,7 @@ export default function ToolMenu() {
 
   return (
     <div
+      className={styles.toolMenu}
       // 아이템 리사이즈시 툴메뉴에 있는 텍스트들이 드래그로 인해 선택되는 것을 방지
       onMouseMoveCapture={(e) => {
         e.preventDefault();
