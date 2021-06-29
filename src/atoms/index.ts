@@ -1,4 +1,5 @@
 import {
+  idsState,
   itemStateWithId,
   selectedIdsState,
   selectedItemsState,
@@ -7,6 +8,7 @@ import {
 import { mindMapBackgroundColorState } from './bgColor';
 
 export {
+  idsState,
   itemStateWithId,
   selectedIdsState,
   selectedItemsState,

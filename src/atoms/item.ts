@@ -15,6 +15,11 @@ export interface ItemInterface {
   children: number[];
 }
 
+export const idsState = atom<number[]>({
+  key: 'itemsState',
+  default: [],
+});
+
 export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
   atom<ItemInterface>({
     key: `item${id}State`,
