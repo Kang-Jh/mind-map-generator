@@ -1,0 +1,5 @@
+.itemsList {
+  flex: 200px;
+  z-index: 10;
+  background-color: #ccc;
+}

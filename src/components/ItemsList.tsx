@@ -1,4 +1,4 @@
-import styles from '../styles/itemsList.module.css';
+import styles from '../styles/ItemsList.module.css';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { idsState } from '../atoms';
