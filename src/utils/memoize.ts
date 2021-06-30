@@ -13,7 +13,7 @@ import { RecoilState } from 'recoil';
  * @param fn RecoilState(atom 함수의 반환값)를 반환하는 함수
  * @returns {function} 메모이제이션된 함수
  */
-function memoizeItemAtomBasedOnId<T = any>(
+function memoize<T = any>(
   fn: (id: number) => RecoilState<T>
 ): (id: number) => RecoilState<T> {
   const store: { [key: number]: any } = {};
@@ -29,4 +29,4 @@ function memoizeItemAtomBasedOnId<T = any>(
   };
 }
 
-export { memoizeItemAtomBasedOnId };
+export { memoize };
