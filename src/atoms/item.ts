@@ -61,16 +61,6 @@ export const selectedItemsState = selector<ItemInterface[]>({
   },
 });
 
-// 선택된 아이디들을 담는 원자
-export const selectedIdsState = selector<number[]>({
-  key: 'selectedIdsState',
-  get: ({ get }) => {
-    const selectedItems = get(selectedItemsState);
-
-    return selectedItems.map((item) => item.id);
-  },
-});
-
 /**
  * string[]에서 string은 JSON.stringify를 통해 number[]를 문자열화 시킨 것임
  */
