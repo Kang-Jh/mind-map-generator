@@ -1,5 +1,15 @@
-.itemsList {
+.itemsListContainer {
   flex: 200px;
   z-index: 10;
   background-color: #ccc;
+}
+
+.buttons {
+  height: 200px;
+}
+
+.itemsList {
+  height: auto;
+  list-style: none;
+  padding: 0;
 }
