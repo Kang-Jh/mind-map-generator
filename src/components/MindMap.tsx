@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   idsState,
   itemStateWithId,
   linkedItemsState,
   mindMapBackgroundColorState,
-  selectedIdsState,
   selectedItemsState,
 } from '../atoms';
 import styles from '../styles/MindMap.module.css';
@@ -15,8 +14,7 @@ import Line from './Line';
 export default function MindMap() {
   const ids = useRecoilValue(idsState);
   const backgroundColor = useRecoilValue(mindMapBackgroundColorState);
-  const setSelectedIds = useSetRecoilState(selectedIdsState);
-  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
+  const setSelectedItems = useSetRecoilState(selectedItemsState);
   const linkedItems = useRecoilValue(linkedItemsState);
   const [resizableId, setResizableId] = useState(0);
   const [isResized, setIsResized] = useState(false);
@@ -35,10 +33,9 @@ export default function MindMap() {
           return;
         }
 
-        setSelectedItems(
-          selectedItems.map((item) => ({ ...item, selected: false }))
+        setSelectedItems((state) =>
+          state.map((item) => ({ ...item, selected: false }))
         );
-        setSelectedIds([]);
       }}
       onMouseDown={(e) => {
         e.preventDefault();
@@ -47,8 +44,8 @@ export default function MindMap() {
       onMouseMove={(e) => {
         e.preventDefault();
         if (e.ctrlKey) {
-          setSelectedItems(
-            selectedItems.map((item) => ({
+          setSelectedItems((state) =>
+            state.map((item) => ({
               ...item,
               top: item.top + e.movementY,
               left: item.left + e.movementX,
