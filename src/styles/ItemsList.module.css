@@ -1,7 +1,7 @@
 .itemsListContainer {
   flex: 200px;
   z-index: 10;
-  background-color: #ccc;
+  background-color: #eee;
 }
 
 .buttons {
