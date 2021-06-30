@@ -1,6 +1,6 @@
 import styles from '../styles/Item.module.css';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { itemStateWithId, selectedIdsState } from '../atoms';
+import { useRecoilState } from 'recoil';
+import { itemStateWithId } from '../atoms';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 export default function Item({
@@ -12,7 +12,6 @@ export default function Item({
 }) {
   const [item, setItem] = useRecoilState(itemStateWithId(id));
   const [isEdittingText, setIsEdittingText] = useState(false);
-  const setSelectedIds = useSetRecoilState(selectedIdsState);
   const [isResizing, setIsResizing] = useState(false);
   // 지름
   const diameter = item.radius * 2;
@@ -54,22 +53,6 @@ export default function Item({
           ...state,
           selected: isEdittingText ? true : !state.selected,
         }));
-        setSelectedIds((state) => {
-          // 현재 텍스트를 수정중이면 그대로 현재 상태 반환
-          if (isEdittingText) {
-            return state;
-          }
-
-          // 텍스트를 수정중이지 않은데
-          // 아이템이 선택된 경우에는
-          // 현재 아이디를 선택된 아이디 리스트에서 삭제
-          if (item.selected) {
-            return state.filter((el) => el !== id);
-          }
-
-          // 선택된 아이디에 현재 아이디 추가
-          return [...state, id];
-        });
 
         setIsEdittingText(false);
       }}
@@ -142,10 +125,6 @@ export default function Item({
               ...state,
               selected: true,
             }));
-            // 선택된 아이디 리스트에 현재 아이디를 포함시킴
-            setSelectedIds((state) => {
-              return state.includes(id) ? state : [...state, id];
-            });
           }}
         >
           {item.text}
