@@ -74,3 +74,18 @@ export const linkedItemsState = atom<string[]>({
   key: 'linkedItemsState',
   default: [],
 });
+
+// 부모가 없는 아이템들
+export const rootedIdsState = selector<number[]>({
+  key: 'rootedItemsState',
+  get: ({ get }) => {
+    const ids = get(idsState);
+
+    const rootedIds = ids
+      .map((id) => get(itemStateWithId(id)))
+      .filter((item) => item.parent === null)
+      .map((item) => item.id);
+
+    return rootedIds;
+  },
+});
