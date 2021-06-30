@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { memoizeItemAtomBasedOnId } from '../utils/memoize';
+import { memoize } from '../utils/memoize';
 
 export interface ItemInterface {
   id: number;
@@ -21,7 +21,7 @@ export const idsState = atom<number[]>({
 });
 
 // 아이디를 인자로 받아 원자를 반환
-export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
+export const itemStateWithId = memoize((id) =>
   atom<ItemInterface>({
     key: `item${id}State`,
     default: {
@@ -40,30 +40,34 @@ export const itemStateWithId = memoizeItemAtomBasedOnId((id) =>
   })
 );
 
-// 선택된 아이디들을 담는 원자
-export const selectedIdsState = atom<number[]>({
-  key: 'selectedIdsState',
-  default: [],
-});
-
 // 선택된 아이디들을 통해 얻어지는 아이디들을 반환하는 선택자
 export const selectedItemsState = selector<ItemInterface[]>({
   key: 'selectedItemsState',
   get: ({ get }) => {
-    const selectedIds = get(selectedIdsState);
+    const ids = get(idsState);
 
-    const items = selectedIds.map((id) => get(itemStateWithId(id)));
+    const items = ids
+      .map((id) => get(itemStateWithId(id)))
+      .filter((item) => item.selected);
 
     return items;
   },
   set: ({ get, set }, newValue) => {
-    const selectedIds = get(selectedIdsState);
+    const items = get(selectedItemsState);
 
-    const itemsAtoms = selectedIds.map((id) => itemStateWithId(id));
-
-    itemsAtoms.forEach((itemAtom, index) => {
-      set(itemAtom, (newValue as ItemInterface[])[index]);
+    items.forEach((item, index) => {
+      set(itemStateWithId(item.id), (newValue as ItemInterface[])[index]);
     });
+  },
+});
+
+// 선택된 아이디들을 담는 원자
+export const selectedIdsState = selector<number[]>({
+  key: 'selectedIdsState',
+  get: ({ get }) => {
+    const selectedItems = get(selectedItemsState);
+
+    return selectedItems.map((item) => item.id);
   },
 });
 
@@ -89,3 +93,33 @@ export const rootedIdsState = selector<number[]>({
     return rootedIds;
   },
 });
+
+/**
+ * 주어진 아이디의 모든 하위 아이템을 반환하는 선택자
+ */
+export const subTreeState = memoize<ItemInterface[]>((id) =>
+  selector({
+    key: `$subTreeStateOf${id}`,
+    get: ({ get }) => {
+      function pushSubTree(arr: ItemInterface[], node: ItemInterface) {
+        for (let i = 0; i < node.children.length; i++) {
+          const child = get(itemStateWithId(node.children[i]));
+          arr.push(child);
+          pushSubTree(arr, child);
+        }
+      }
+
+      const root = get(itemStateWithId(id));
+      const subTree: ItemInterface[] = [root];
+      pushSubTree(subTree, root);
+      return subTree;
+    },
+    set: ({ get, set }, newValue) => {
+      const subTree = get(subTreeState(id));
+
+      subTree.forEach((node, index) =>
+        set(itemStateWithId(node.id), (newValue as ItemInterface[])[index])
+      );
+    },
+  })
+);
