@@ -38,59 +38,55 @@ export default function ItemsList() {
 
             <button
               onClick={() => {
-                if (
-                  selectedItems[1].parent === null &&
-                  !selectedItems[0].children.includes(selectedItems[1].id)
-                ) {
-                  setSelectedItems(
-                    selectedItems.map((item) => ({
-                      ...item,
-                      parent:
-                        item.id === selectedItems[1].id
-                          ? selectedItems[0].id
-                          : null,
-                      children:
-                        item.id === selectedItems[0].id
-                          ? [...item.children, selectedItems[1].id]
-                          : item.children,
-                    }))
-                  );
+                const parent = selectedItems[0];
+                const child = selectedItems[1];
 
-                  setLinkedIds((state) => [
-                    ...state,
-                    JSON.stringify([selectedItems[0].id, selectedItems[1].id]),
-                  ]);
-                } else if (
-                  selectedItems[0].children.includes(selectedItems[1].id)
-                ) {
-                  setSelectedItems(
-                    selectedItems.map((item) => ({
+                if (child.parent === parent.id) {
+                  // 자식의 부모 아이디와 현재 선택된 부모 아이디가 같은 경우
+                  // 연결 해제시키고 linkedIds에서 아이디 쌍을 삭제
+
+                  setSelectedItems((state) =>
+                    state.map((item) => ({
                       ...item,
-                      parent:
-                        item.id === selectedItems[1].id ? null : item.parent,
+                      parent: item.id === child.id ? null : item.parent,
                       children:
-                        item.id === selectedItems[0].id
-                          ? item.children.filter(
-                              (id) => id !== selectedItems[1].id
-                            )
+                        item.id === parent.id
+                          ? item.children.filter((id) => id !== child.id)
                           : item.children,
                     }))
                   );
 
                   setLinkedIds((state) =>
                     state.filter(
-                      (pair) =>
-                        pair !==
-                        JSON.stringify([
-                          selectedItems[0].id,
-                          selectedItems[1].id,
-                        ])
+                      (pair) => pair !== JSON.stringify([parent.id, child.id])
                     )
                   );
+                } else if (child.parent === null) {
+                  // 자식의 부모가 아직 설정되지 않은 경우
+                  // 부모와 자식을 연결 시키고 linkedIds에 아이디 쌍을 추가
+                  setSelectedItems((state) =>
+                    state.map((item) => ({
+                      ...item,
+                      parent: item.id === parent.id ? item.parent : parent.id,
+                      children:
+                        item.id === parent.id
+                          ? [...item.children, child.id]
+                          : item.children,
+                    }))
+                  );
+
+                  setLinkedIds((state) => {
+                    const pair = JSON.stringify([parent.id, child.id]);
+                    if (state.includes(pair)) {
+                      return state;
+                    }
+
+                    return [...state, pair];
+                  });
                 }
               }}
             >
-              {selectedItems[0].children.includes(selectedItems[1].id)
+              {selectedItems[1].parent === selectedItems[0].id
                 ? '연결 해제'
                 : '연결하기'}
             </button>
