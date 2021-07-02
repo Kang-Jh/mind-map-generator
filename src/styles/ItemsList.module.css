@@ -1,15 +1,20 @@
 .itemsListContainer {
-  flex: 200px;
+  position: sticky;
+  top: 25%;
+  left: 20px;
+  width: 200px;
+  height: 500px;
   z-index: 10;
   background-color: #eee;
 }
 
 .buttons {
-  height: 200px;
+  height: 100px;
 }
 
 .itemsList {
-  height: auto;
+  overflow: auto;
+  height: 350px;
   list-style: none;
   padding: 0;
 }
