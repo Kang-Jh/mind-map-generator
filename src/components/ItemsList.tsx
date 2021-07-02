@@ -6,6 +6,7 @@ import {
   linkedItemsState,
   rootedIdsState,
   selectedItemsState,
+  totalItemsState,
 } from '../atoms';
 import ListItem from './ListItem';
 
@@ -15,6 +16,7 @@ export default function ItemsList() {
   const setLinkedIds = useSetRecoilState(linkedItemsState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
   const rootedIds = useRecoilValue(rootedIdsState);
+  const setTotalItemsState = useSetRecoilState(totalItemsState);
 
   return (
     <div className={styles.itemsListContainer}>
@@ -27,6 +29,32 @@ export default function ItemsList() {
             }}
           >
             아이템 생성
+          </button>
+
+          <button
+            onClick={() => {
+              for (let i = 0; i < selectedItems.length; i++) {
+                const id = selectedItems[i].id;
+
+                setLinkedIds((state) =>
+                  state.filter((pair) => !pair.includes(`${id}`))
+                );
+
+                setIds((state) => state.filter((el) => el !== id));
+
+                setTotalItemsState((state) =>
+                  state.map((item) => ({
+                    ...item,
+                    parent: item.parent === id ? null : item.parent,
+                    children: item.children.includes(id)
+                      ? item.children.filter((el) => el !== id)
+                      : item.children,
+                  }))
+                );
+              }
+            }}
+          >
+            아이템 삭제
           </button>
         </div>
 
