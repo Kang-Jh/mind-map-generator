@@ -37,7 +37,7 @@ export default function ItemsList() {
                 const id = selectedItems[i].id;
 
                 setLinkedIds((state) =>
-                  state.filter((pair) => !pair.includes(`${id}`))
+                  state.filter((pair) => !JSON.parse(pair).includes(id))
                 );
 
                 setIds((state) => state.filter((el) => el !== id));
@@ -45,7 +45,10 @@ export default function ItemsList() {
                 setTotalItemsState((state) =>
                   state.map((item) => ({
                     ...item,
+                    // 부모가 삭제되는 경우면 null로 그렇지 않은 경우엔 현재 부모를 그대로 사용
                     parent: item.parent === id ? null : item.parent,
+                    // 자식 목록에 삭제되는 id가 있으면 필터링
+                    // 자식 목록에 삭제되는 id가 없으면 현재 자식 목록 그대로 사용
                     children: item.children.includes(id)
                       ? item.children.filter((el) => el !== id)
                       : item.children,
