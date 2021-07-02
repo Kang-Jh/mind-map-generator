@@ -1,4 +1,5 @@
 .MindMapDiv {
+  flex: 18 18 4500px;
   width: 100%;
   height: 100%;
 }

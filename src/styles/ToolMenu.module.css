@@ -1,8 +1,9 @@
 .toolMenu {
+  flex: 1 1 250px;
   position: sticky;
   top: 25%;
   right: 20px;
-  width: 200px;
+  width: 250px;
   height: 500px;
   overflow: auto;
   z-index: 10;
