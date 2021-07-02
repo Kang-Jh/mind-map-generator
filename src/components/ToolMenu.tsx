@@ -58,12 +58,12 @@ export default function ToolMenu() {
             <input
               id="itemRadius"
               type="number"
-              value={selectedItem.radius}
+              value={selectedItem.radius ? selectedItem.radius : ''}
               onChange={(e) =>
                 setSelectedItems(
                   selectedItems.map((state) => ({
                     ...state,
-                    radius: parseInt(e.target.value),
+                    radius: e.target.value ? parseInt(e.target.value) : 0,
                   }))
                 )
               }
@@ -75,12 +75,12 @@ export default function ToolMenu() {
             <input
               type="number"
               id="fontSize"
-              value={selectedItem.fontSize}
+              value={selectedItem.fontSize ? selectedItem.fontSize : ''}
               onChange={(e) =>
                 setSelectedItems(
                   selectedItems.map((state) => ({
                     ...state,
-                    fontSize: parseInt(e.target.value),
+                    fontSize: e.target.value ? parseInt(e.target.value) : 0,
                   }))
                 )
               }
@@ -126,11 +126,11 @@ export default function ToolMenu() {
                 <input
                   id="positionX"
                   type="number"
-                  value={selectedItem.left}
+                  value={selectedItem.left ? selectedItem.left : ''}
                   onChange={(e) =>
                     setSelectedItem((state) => ({
                       ...state,
-                      left: parseInt(e.target.value),
+                      left: e.target.value ? parseInt(e.target.value) : 0,
                     }))
                   }
                 />
@@ -141,11 +141,11 @@ export default function ToolMenu() {
                 <input
                   id="positionY"
                   type="number"
-                  value={selectedItem.top}
+                  value={selectedItem.top ? selectedItem.top : ''}
                   onChange={(e) =>
                     setSelectedItem((state) => ({
                       ...state,
-                      top: parseInt(e.target.value),
+                      top: e.target.value ? parseInt(e.target.value) : 0,
                     }))
                   }
                 />
