@@ -40,6 +40,22 @@ export const itemStateWithId = memoize((id) =>
   })
 );
 
+export const totalItemsState = selector<ItemInterface[]>({
+  key: 'totalItemsSelector',
+  get: ({ get }) => {
+    const ids = get(idsState);
+
+    return ids.map((id) => get(itemStateWithId(id)));
+  },
+  set: ({ get, set }, newValue) => {
+    const ids = get(idsState);
+
+    ids.forEach((id, index) => {
+      set(itemStateWithId(id), (newValue as ItemInterface[])[index]);
+    });
+  },
+});
+
 // 선택된 아이디들을 통해 얻어지는 아이디들을 반환하는 선택자
 export const selectedItemsState = selector<ItemInterface[]>({
   key: 'selectedItemsState',
@@ -69,9 +85,9 @@ export const linkedItemsState = atom<string[]>({
   default: [],
 });
 
-// 부모가 없는 아이템들
+// 부모가 없는 아이템들의 아이디들 선택자
 export const rootedIdsState = selector<number[]>({
-  key: 'rootedItemsState',
+  key: 'rootedIdsState',
   get: ({ get }) => {
     const ids = get(idsState);
 

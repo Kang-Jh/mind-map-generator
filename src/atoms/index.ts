@@ -5,6 +5,7 @@ import {
   linkedItemsState,
   rootedIdsState,
   subTreeState,
+  totalItemsState,
 } from './item';
 import { mindMapBackgroundColorState } from './bgColor';
 
@@ -16,4 +17,5 @@ export {
   mindMapBackgroundColorState,
   rootedIdsState,
   subTreeState,
+  totalItemsState,
 };
