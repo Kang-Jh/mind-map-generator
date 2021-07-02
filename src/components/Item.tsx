@@ -1,7 +1,7 @@
 import styles from '../styles/Item.module.css';
 import { useRecoilState } from 'recoil';
 import { itemStateWithId } from '../atoms';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function Item({
   id,
@@ -26,6 +26,16 @@ export default function Item({
   const resizeBtnPositionX = diameter - (item.radius - resizeBtnEdge);
   // 제 3사분면에 위치시켜야 하므로 반지름에 변의 길이를 더해줌
   const resizeBtnPositionY = item.radius + resizeBtnEdge;
+
+  // 아이템 생성 시 위치를 설정하는 이펙트
+  useEffect(() => {
+    // 현재 화면의 왼쪽 상단에 위치하게 변경
+    setItem((state) => ({
+      ...state,
+      top: window.scrollY + 200,
+      left: window.scrollX + 250,
+    }));
+  }, [setItem]);
 
   return (
     <div
