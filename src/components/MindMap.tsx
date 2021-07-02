@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   idsState,
@@ -19,6 +19,11 @@ export default function MindMap() {
   const [resizableId, setResizableId] = useState(0);
   const [isResized, setIsResized] = useState(false);
   const setResizableItem = useSetRecoilState(itemStateWithId(resizableId));
+
+  // 마인드맵의 대략 중간부터 실행되게 수정
+  useEffect(() => {
+    window.scrollTo(2000, 2000);
+  }, []);
 
   return (
     <div
