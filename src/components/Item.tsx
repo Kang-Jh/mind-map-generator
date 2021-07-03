@@ -22,8 +22,8 @@ export default function Item({
   // 피타고라스 정리에 의해 a^2 + a^2 = r^2을 만족시키게 됨
   // 이 변의 길이는 (a^2 / 2)의 제곱근이됨
   const resizeBtnEdge = Math.round(Math.sqrt(Math.pow(item.radius, 2) / 2));
-  // 제 3사분면에 위치시켜야 하므로 반지름에서 변의 길이를 뺀 값을 지름에서 빼줘야 함
-  const resizeBtnPositionX = diameter - (item.radius - resizeBtnEdge);
+  // 제 3사분면에 위치시켜야 하므로 반지름에 변의 길이를 더해줌
+  const resizeBtnPositionX = item.radius + resizeBtnEdge;
   // 제 3사분면에 위치시켜야 하므로 반지름에 변의 길이를 더해줌
   const resizeBtnPositionY = item.radius + resizeBtnEdge;
 
