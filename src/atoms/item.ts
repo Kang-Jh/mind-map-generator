@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, GetRecoilValue, selector } from 'recoil';
 import { memoize } from '../utils/memoize';
 
 export interface ItemInterface {
@@ -101,23 +101,31 @@ export const rootedIdsState = selector<number[]>({
 });
 
 /**
+ * 특정 아이템의 모든 자손 아이템을 만들기 위한 함수로
+ * 주어진 배열에 모든 자손 아이템들을 추가한다
+ */
+function pushSubTree(
+  arr: ItemInterface[],
+  node: ItemInterface,
+  get: GetRecoilValue
+) {
+  for (let i = 0; i < node.children.length; i++) {
+    const child = get(itemStateWithId(node.children[i]));
+    arr.push(child);
+    pushSubTree(arr, child, get);
+  }
+}
+
+/**
  * 주어진 아이디의 모든 하위 아이템을 반환하는 선택자
  */
 export const subTreeState = memoize<ItemInterface[]>((id) =>
   selector({
     key: `$subTreeStateOf${id}`,
     get: ({ get }) => {
-      function pushSubTree(arr: ItemInterface[], node: ItemInterface) {
-        for (let i = 0; i < node.children.length; i++) {
-          const child = get(itemStateWithId(node.children[i]));
-          arr.push(child);
-          pushSubTree(arr, child);
-        }
-      }
-
       const root = get(itemStateWithId(id));
       const subTree: ItemInterface[] = [root];
-      pushSubTree(subTree, root);
+      pushSubTree(subTree, root, get);
       return subTree;
     },
     set: ({ get, set }, newValue) => {
