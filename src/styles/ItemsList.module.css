@@ -1,12 +1,12 @@
 .itemsListContainer {
   flex: 1 1 250px;
-  position: sticky;
+  position: fixed;
   top: 25%;
   left: 20px;
   width: 250px;
   height: 500px;
   z-index: 10;
-  background-color: #eee;
+  background-color: hsl(0, 0%, 90%);
 }
 
 .buttons {
