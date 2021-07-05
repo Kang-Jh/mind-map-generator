@@ -3,7 +3,7 @@
 }
 
 .text:hover {
-  background-color: #aaa;
+  background-color: hsl(0, 0%, 70%);
 }
 
 .ul {
@@ -13,5 +13,5 @@
 }
 
 .selected {
-  background-color: #aaa;
+  background-color: hsl(0, 0%, 70%);
 }
