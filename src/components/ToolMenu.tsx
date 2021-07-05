@@ -5,6 +5,7 @@ import {
   itemStateWithId,
   mindMapBackgroundColorState,
 } from '../atoms';
+import ColorPicker from './ColorPicker';
 
 export default function ToolMenu() {
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
@@ -16,42 +17,29 @@ export default function ToolMenu() {
   );
 
   return (
-    <div
-      className={styles.toolMenu}
-      // 아이템 리사이즈시 툴메뉴에 있는 텍스트들이 드래그로 인해 선택되는 것을 방지
-      onMouseMoveCapture={(e) => {
-        e.preventDefault();
-      }}
-    >
-      <div>
-        <label htmlFor="mindMapBgColor">마인드맵 배경 색상</label>
-        <input
-          type="color"
-          id="mindMapBgColor"
-          value={mindMapBackgroundColor}
-          onChange={(e) => setMindMapBackgroundColor(e.target.value)}
-        />
-      </div>
+    <div className={styles.toolMenu}>
+      <div>마인드 맵</div>
+
+      <ColorPicker
+        label="배경 색상"
+        color={mindMapBackgroundColor}
+        setColor={(color) => setMindMapBackgroundColor(color)}
+      />
 
       {/* 부등호를 써준 이유는 selectedItems.length 로 할 경우 길이가 0일 때 화면에 0이 표시되기 때문임 */}
       {selectedItems.length > 0 && (
         <div>
-          <div>
-            <label htmlFor="itemBgColor">아이템 배경 색상</label>
-            <input
-              type="color"
-              id="itemBgColor"
-              value={selectedItem.bgColor}
-              onChange={(e) =>
-                setSelectedItems(
-                  selectedItems.map((state) => ({
-                    ...state,
-                    bgColor: e.target.value,
-                  }))
-                )
-              }
-            />
-          </div>
+          <div>아이템</div>
+
+          <ColorPicker
+            label="배경 색상"
+            color={selectedItem.bgColor}
+            setColor={(color) =>
+              setSelectedItems((state) =>
+                state.map((item) => ({ ...item, bgColor: color }))
+              )
+            }
+          />
 
           <div>
             <label htmlFor="itemRadius">반지름</label>
@@ -87,22 +75,15 @@ export default function ToolMenu() {
             />
           </div>
 
-          <div>
-            <label htmlFor="fontColor">폰트 색상</label>
-            <input
-              type="color"
-              id="fontColor"
-              value={selectedItem.fontColor}
-              onChange={(e) =>
-                setSelectedItems(
-                  selectedItems.map((state) => ({
-                    ...state,
-                    fontColor: e.target.value,
-                  }))
-                )
-              }
-            />
-          </div>
+          <ColorPicker
+            label="폰트 색상"
+            color={selectedItem.fontColor}
+            setColor={(color) =>
+              setSelectedItems((state) =>
+                state.map((item) => ({ ...item, fontColor: color }))
+              )
+            }
+          />
 
           {selectedItems.length === 1 && (
             <>
