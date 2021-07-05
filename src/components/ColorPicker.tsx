@@ -23,13 +23,15 @@ export default function ColorPicker({
       <div>
         <span>{label}</span>
         <button
+          className={styles.button}
+          style={{
+            background: color,
+          }}
           onClick={() => {
             setLastColor(color);
             setIsOpened(true);
           }}
-        >
-          <span>배경 색상 버튼</span>
-        </button>
+        />
       </div>
 
       {isOpened && (
