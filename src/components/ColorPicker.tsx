@@ -153,7 +153,12 @@ export default function ColorPicker({
               setIsHueMouseDown(true);
               if (e.target instanceof HTMLDivElement) {
                 const rect = e.target.getBoundingClientRect();
-                const h = Math.ceil((e.clientX - rect.left) * 1.8);
+                const h = Math.ceil(
+                  // 색상 값은
+                  // 현재 마우스가 타겟의 시작 x좌표에서 얼마나 떨어져있는지를 나타내는 값에
+                  // 1픽셀 당 몇 도인지를 곱해준 값
+                  (e.clientX - rect.left) * (360 / rect.width)
+                );
                 setColor(`hsl(${h}, 100%, 50%)`);
               }
             }}
@@ -161,7 +166,9 @@ export default function ColorPicker({
               e.stopPropagation();
               if (isHueMouseDown && e.target instanceof HTMLDivElement) {
                 const rect = e.target.getBoundingClientRect();
-                const h = Math.ceil((e.clientX - rect.left) * 1.8);
+                const h = Math.ceil(
+                  (e.clientX - rect.left) * (360 / rect.width)
+                );
                 setColor(`hsl(${h}, 100%, 50%)`);
               }
             }}
