@@ -70,3 +70,15 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.mdoalBtnDiv {
+  display: flex;
+  align-items: center;
+  margin: 5px auto;
+  padding: 5px;
+}
