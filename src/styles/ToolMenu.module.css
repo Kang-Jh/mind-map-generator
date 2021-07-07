@@ -1,11 +1,17 @@
 .toolMenu {
   flex: 1 1 250px;
   position: fixed;
-  top: 25%;
+  top: 15%;
   right: 20px;
   width: 250px;
-  height: 500px;
+  height: 600px;
   overflow: auto;
   z-index: 10;
   background-color: hsl(0, 0%, 90%);
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.itemForm {
+  margin-top: 40px;
 }

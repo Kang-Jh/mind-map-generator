@@ -6,6 +6,7 @@ import {
   mindMapBackgroundColorState,
 } from '../atoms';
 import ColorPicker from './ColorPicker';
+import InputField from './InputField';
 
 export default function ToolMenu() {
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
@@ -28,7 +29,7 @@ export default function ToolMenu() {
 
       {/* 부등호를 써준 이유는 selectedItems.length 로 할 경우 길이가 0일 때 화면에 0이 표시되기 때문임 */}
       {selectedItems.length > 0 && (
-        <div>
+        <div className={styles.itemForm}>
           <div>아이템</div>
 
           <ColorPicker
@@ -41,39 +42,35 @@ export default function ToolMenu() {
             }
           />
 
-          <div>
-            <label htmlFor="itemRadius">반지름</label>
-            <input
-              id="itemRadius"
-              type="number"
-              value={selectedItem.radius ? selectedItem.radius : ''}
-              onChange={(e) =>
-                setSelectedItems(
-                  selectedItems.map((state) => ({
-                    ...state,
-                    radius: e.target.value ? parseInt(e.target.value) : 0,
-                  }))
-                )
-              }
-            />
-          </div>
+          <InputField
+            label="반지름"
+            type="number"
+            id="itemRadius"
+            value={selectedItem.radius ? selectedItem.radius : ''}
+            onChange={(e) =>
+              setSelectedItems((state) =>
+                state.map((item) => ({
+                  ...item,
+                  radius: e.target.value ? parseInt(e.target.value) : 0,
+                }))
+              )
+            }
+          />
 
-          <div>
-            <label htmlFor="fontSize">폰트 크기</label>
-            <input
-              type="number"
-              id="fontSize"
-              value={selectedItem.fontSize ? selectedItem.fontSize : ''}
-              onChange={(e) =>
-                setSelectedItems(
-                  selectedItems.map((state) => ({
-                    ...state,
-                    fontSize: e.target.value ? parseInt(e.target.value) : 0,
-                  }))
-                )
-              }
-            />
-          </div>
+          <InputField
+            label="폰트 크기"
+            id="fontSize"
+            type="number"
+            value={selectedItem.fontSize ? selectedItem.fontSize : ''}
+            onChange={(e) =>
+              setSelectedItems((state) =>
+                state.map((item) => ({
+                  ...item,
+                  fontSize: e.target.value ? parseInt(e.target.value) : 0,
+                }))
+              )
+            }
+          />
 
           <ColorPicker
             label="폰트 색상"
@@ -87,50 +84,44 @@ export default function ToolMenu() {
 
           {selectedItems.length === 1 && (
             <>
-              <div>
-                <label htmlFor="itemText">내용</label>
-                <input
-                  id="itemText"
-                  type="text"
-                  value={selectedItem.text}
-                  onChange={(e) =>
-                    setSelectedItem((state) => ({
-                      ...state,
-                      text: e.target.value,
-                    }))
-                  }
-                />
-              </div>
+              <InputField
+                label="내용"
+                id="itemText"
+                type="text"
+                value={selectedItem.text}
+                onChange={(e) =>
+                  setSelectedItem((state) => ({
+                    ...state,
+                    text: e.target.value,
+                  }))
+                }
+              />
 
-              <div>
-                <label htmlFor="positionX">X 좌표</label>
-                <input
-                  id="positionX"
-                  type="number"
-                  value={selectedItem.left ? selectedItem.left : ''}
-                  onChange={(e) =>
-                    setSelectedItem((state) => ({
-                      ...state,
-                      left: e.target.value ? parseInt(e.target.value) : 0,
-                    }))
-                  }
-                />
-              </div>
+              <InputField
+                label="X 좌표"
+                id="positionX"
+                type="number"
+                value={selectedItem.left ? selectedItem.left : ''}
+                onChange={(e) =>
+                  setSelectedItem((state) => ({
+                    ...state,
+                    left: e.target.value ? parseInt(e.target.value) : 0,
+                  }))
+                }
+              />
 
-              <div>
-                <label htmlFor="positionY">Y 좌표</label>
-                <input
-                  id="positionY"
-                  type="number"
-                  value={selectedItem.top ? selectedItem.top : ''}
-                  onChange={(e) =>
-                    setSelectedItem((state) => ({
-                      ...state,
-                      top: e.target.value ? parseInt(e.target.value) : 0,
-                    }))
-                  }
-                />
-              </div>
+              <InputField
+                label="Y 좌표"
+                id="positionY"
+                type="number"
+                value={selectedItem.top ? selectedItem.top : ''}
+                onChange={(e) =>
+                  setSelectedItem((state) => ({
+                    ...state,
+                    top: e.target.value ? parseInt(e.target.value) : 0,
+                  }))
+                }
+              />
             </>
           )}
         </div>
