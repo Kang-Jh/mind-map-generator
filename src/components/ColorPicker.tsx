@@ -32,8 +32,8 @@ export default function ColorPicker({
   return (
     <div className={styles.colorPicker} ref={colorPickerRef}>
       {/* 색상 버튼 */}
-      <div>
-        <span>{label}</span>
+      <div className={styles.mdoalBtnDiv}>
+        <span className={styles.label}>{label}</span>
         <button
           className={styles.button}
           style={{
