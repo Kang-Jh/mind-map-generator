@@ -11,7 +11,6 @@ export default function Item({
   setResizableId: Dispatch<SetStateAction<number>>;
 }) {
   const [item, setItem] = useRecoilState(itemStateWithId(id));
-  const [isEdittingText, setIsEdittingText] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   // 지름
   const diameter = item.radius * 2;
@@ -57,14 +56,11 @@ export default function Item({
           return;
         }
 
-        // 텍스트를 수정중이면 항상 선택된 상태를 유지하고
-        // 그렇지 않은 경우 선택 또는 선택해제시킴
+        // 선택 또는 선택해제시킴
         setItem((state) => ({
           ...state,
-          selected: isEdittingText ? true : !state.selected,
+          selected: !state.selected,
         }));
-
-        setIsEdittingText(false);
       }}
       // 텍스트 드래그 방지
       onMouseMove={(e) => {
@@ -92,54 +88,8 @@ export default function Item({
         />
       )}
 
-      {/* 텍스트가 두 번 클릭되면 입력 필드를 렌더링 */}
-      {isEdittingText ? (
-        <input
-          className={styles.input}
-          type="text"
-          value={item.text}
-          onChange={(e) =>
-            setItem((state) => ({ ...state, text: e.target.value }))
-          }
-          onKeyDown={(e) => {
-            // 입력 필드에서 엔터키가 눌리면 더 이상 수정을 하지 않음
-            if (e.key === 'Enter') {
-              setIsEdittingText(false);
-            }
-          }}
-          // 입력 필드 클릭시 아이템이 선택되는 것을 막기 위한 onClick
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          // 텍스트 드래그를 통한 선택을 위한 onMouseMove
-          onMouseMove={(e) => {
-            e.stopPropagation();
-          }}
-          autoFocus
-        />
-      ) : (
-        <span
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          // 텍스트 두번 클릭하면 입력 필드 렌더링
-          onDoubleClick={(e) => {
-            e.stopPropagation();
-            if (e.ctrlKey || e.altKey) {
-              return;
-            }
-
-            setIsEdittingText(true);
-            // 아이템을 선택된 상태로 변경
-            setItem((state) => ({
-              ...state,
-              selected: true,
-            }));
-          }}
-        >
-          {item.text}
-        </span>
-      )}
+      {/* 텍스트 필드 */}
+      <span>{item.text}</span>
     </div>
   );
 }
