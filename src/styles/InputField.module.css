@@ -1,0 +1,33 @@
+.inputField {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+.label {
+  width: 70px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.input {
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 8px;
+}
+
+.input:focus {
+  outline: 1px solid blue;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
+}
