@@ -31,8 +31,8 @@ export default function Item({
     // 현재 화면의 왼쪽 상단에 위치하게 변경
     setItem((state) => ({
       ...state,
-      top: window.scrollY + 200,
-      left: window.scrollX + 250,
+      top: window.scrollY + 150,
+      left: window.scrollX + 350,
     }));
   }, [setItem]);
 
