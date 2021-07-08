@@ -1,16 +1,50 @@
 .itemsListContainer {
   flex: 1 1 250px;
   position: fixed;
-  top: 25%;
+  top: 15%;
   left: 20px;
   width: 250px;
-  height: 500px;
+  height: 600px;
   z-index: 10;
   background-color: hsl(0, 0%, 90%);
+  padding: 15px;
+  border-radius: 20px;
 }
 
 .buttons {
-  height: 100px;
+  height: 160px;
+  margin-bottom: 40px;
+}
+
+.button {
+  width: 100%;
+  height: 30px;
+  margin: 5px auto;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.howToUseBtn {
+  composes: button;
+  background-color: hsl(0, 0%, 30%);
+}
+
+.addBtn {
+  composes: button;
+  background-color: hsl(125, 50%, 50%);
+}
+
+.deleteBtn {
+  composes: button;
+  background-color: hsl(0, 50%, 50%);
+}
+
+.linkBtn {
+  composes: button;
+  background-color: hsl(240, 60%, 50%);
 }
 
 .itemsList {
