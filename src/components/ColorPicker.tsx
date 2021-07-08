@@ -50,7 +50,7 @@ export default function ColorPicker({
         <div
           className={styles.colorPickerModal}
           style={{
-            top: `calc(25% + ${colorPickerRef.current?.offsetTop ?? 0}px)`,
+            top: `calc(15% + ${colorPickerRef.current?.offsetTop ?? 0}px)`,
           }}
         >
           <div className={styles.SLSelectorWrapper}>
@@ -183,8 +183,9 @@ export default function ColorPicker({
           ></div>
 
           {/* 버튼 영역 */}
-          <div>
+          <div className={styles.colorPickerBtnDiv}>
             <button
+              className={styles.confirmBtn}
               onClick={() => {
                 setIsOpened(false);
               }}
@@ -193,6 +194,7 @@ export default function ColorPicker({
             </button>
 
             <button
+              className={styles.cancelBtn}
               onClick={() => {
                 setColor(lastColor);
                 setIsOpened(false);

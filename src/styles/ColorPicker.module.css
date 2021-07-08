@@ -83,3 +83,30 @@
   margin: 10px auto;
   padding: 5px;
 }
+
+.colorPickerBtnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorPickerBtn {
+  width: 70px;
+  height: 30px;
+  margin: 0px 10px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.confirmBtn {
+  composes: colorPickerBtn;
+  background-color: hsl(125, 50%, 50%);
+}
+
+.cancelBtn {
+  composes: colorPickerBtn;
+  background-color: hsl(0, 50%, 50%);
+}
