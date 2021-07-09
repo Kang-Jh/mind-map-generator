@@ -17,7 +17,7 @@ function ListItem({ id }: { id: number }) {
       <button
         className={
           item.selected
-            ? `${styles.selected} ${styles.text}`
+            ? `${styles.selected} ${styles.listItem}`
             : `${styles.listItem}`
         }
         onClick={(e) => {
