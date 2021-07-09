@@ -89,7 +89,7 @@ export default function Item({
       )}
 
       {/* 텍스트 필드 */}
-      <span>{item.text}</span>
+      <span className={styles.text}>{item.text}</span>
     </div>
   );
 }

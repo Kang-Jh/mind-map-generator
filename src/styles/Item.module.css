@@ -6,18 +6,20 @@
   border-radius: 50%;
 }
 
-.inputBox {
-  width: 100%;
-}
-
-.input {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .selected {
   border: 3px blue dashed;
   resize: both;
+}
+
+.text {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  resize: none !important;
 }
 
 .resizeBtn {
