@@ -50,7 +50,7 @@
 
 .itemsList {
   overflow: auto;
-  height: 350px;
+  height: 400px;
   list-style: none;
   padding: 0;
 }
