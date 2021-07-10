@@ -7,6 +7,7 @@ import {
 } from '../atoms';
 import ColorPicker from './ColorPicker';
 import InputField from './InputField';
+import Zoom from './Zoom';
 
 export default function ToolMenu() {
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
@@ -19,13 +20,17 @@ export default function ToolMenu() {
 
   return (
     <div className={styles.toolMenu}>
-      <div>마인드 맵</div>
+      <div>
+        <div>마인드 맵</div>
 
-      <ColorPicker
-        label="배경 색상"
-        color={mindMapBackgroundColor}
-        setColor={(color) => setMindMapBackgroundColor(color)}
-      />
+        <ColorPicker
+          label="배경 색상"
+          color={mindMapBackgroundColor}
+          setColor={(color) => setMindMapBackgroundColor(color)}
+        />
+
+        <Zoom />
+      </div>
 
       {/* 부등호를 써준 이유는 selectedItems.length 로 할 경우 길이가 0일 때 화면에 0이 표시되기 때문임 */}
       {selectedItems.length > 0 && (

@@ -6,6 +6,7 @@ import {
   linkedItemsState,
   mindMapBackgroundColorState,
   selectedItemsState,
+  zoomState,
 } from '../atoms';
 import styles from '../styles/MindMap.module.css';
 import Item from './Item';
@@ -19,6 +20,7 @@ export default function MindMap() {
   const [resizableId, setResizableId] = useState(0);
   const [isResized, setIsResized] = useState(false);
   const setResizableItem = useSetRecoilState(itemStateWithId(resizableId));
+  const zoom = useRecoilValue(zoomState);
 
   // 마인드맵의 대략 중간부터 실행되게 수정
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function MindMap() {
 
   return (
     <div
-      style={{ backgroundColor }}
+      style={{ backgroundColor, transform: `scale(${zoom / 100})` }}
       className={styles.MindMapDiv}
       // 바탕을 클릭하면 선택된 모든 아이템들이 풀리도록 onClick 프로퍼티 설정
       onClick={() => {
