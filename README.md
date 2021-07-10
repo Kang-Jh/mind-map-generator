@@ -1,5 +1,11 @@
 # 마인드 맵 생성기
 
+Mind Map Generator는 리코일(RecoilJS)의 소개 동영상에서 아이디어를 얻어 제작한 리코일과 리액트만을 이용한 프로젝트입니다.
+
+데모 [https://kang-jh.github.io/mind-map-generator/](https://kang-jh.github.io/mind-map-generator/)
+
+소스코드 [https://github.com/Kang-Jh/mind-map-generator](https://github.com/Kang-Jh/mind-map-generator)
+
 ## 기술 스택
 
 - ReactJS
