@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/mind-map-generator/static/css/main.d5de3297.chunk.css",
+    "main.js": "/mind-map-generator/static/js/main.558f7091.chunk.js",
+    "main.js.map": "/mind-map-generator/static/js/main.558f7091.chunk.js.map",
+    "runtime-main.js": "/mind-map-generator/static/js/runtime-main.e569af3c.js",
+    "runtime-main.js.map": "/mind-map-generator/static/js/runtime-main.e569af3c.js.map",
+    "static/js/2.5174a8c5.chunk.js": "/mind-map-generator/static/js/2.5174a8c5.chunk.js",
+    "static/js/2.5174a8c5.chunk.js.map": "/mind-map-generator/static/js/2.5174a8c5.chunk.js.map",
+    "static/js/3.3ca71be1.chunk.js": "/mind-map-generator/static/js/3.3ca71be1.chunk.js",
+    "static/js/3.3ca71be1.chunk.js.map": "/mind-map-generator/static/js/3.3ca71be1.chunk.js.map",
+    "index.html": "/mind-map-generator/index.html",
+    "static/css/main.d5de3297.chunk.css.map": "/mind-map-generator/static/css/main.d5de3297.chunk.css.map",
+    "static/js/2.5174a8c5.chunk.js.LICENSE.txt": "/mind-map-generator/static/js/2.5174a8c5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e569af3c.js",
+    "static/js/2.5174a8c5.chunk.js",
+    "static/css/main.d5de3297.chunk.css",
+    "static/js/main.558f7091.chunk.js"
+  ]
+}
