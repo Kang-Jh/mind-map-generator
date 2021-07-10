@@ -55,6 +55,11 @@ export default function HowToUse({
               버튼이 나타납니다.
             </p>
           </li>
+
+          <li>
+            연결의 경우 선택된 순서에 상관 없이 항상 먼저 생성된 아이템이 상위
+            개념이 됩니다.
+          </li>
         </ul>
 
         <button className={styles.btn} onClick={() => setIsOpened(false)}>
