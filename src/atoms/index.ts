@@ -8,6 +8,7 @@ import {
   totalItemsState,
 } from './item';
 import { mindMapBackgroundColorState } from './bgColor';
+import { zoomState } from './zoom';
 
 export {
   idsState,
@@ -18,4 +19,5 @@ export {
   rootedIdsState,
   subTreeState,
   totalItemsState,
+  zoomState,
 };
