@@ -17,7 +17,7 @@ export default function ItemsList() {
   const setLinkedIds = useSetRecoilState(linkedItemsState);
   const [selectedItems, setSelectedItems] = useRecoilState(selectedItemsState);
   const rootedIds = useRecoilValue(rootedIdsState);
-  const setTotalItemsState = useSetRecoilState(totalItemsState);
+  const setTotalItems = useSetRecoilState(totalItemsState);
   const [isHowToUseOpened, setIsHowToUseOpened] = useState(false);
 
   return (
@@ -53,7 +53,7 @@ export default function ItemsList() {
 
                 setIds((state) => state.filter((el) => el !== id));
 
-                setTotalItemsState((state) =>
+                setTotalItems((state) =>
                   state.map((item) => ({
                     ...item,
                     // 부모가 삭제되는 경우면 null로 그렇지 않은 경우엔 현재 부모를 그대로 사용
